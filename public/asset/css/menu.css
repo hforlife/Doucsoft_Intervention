@@ -1,0 +1,220 @@
+:root {
+    --main-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --lighter-color: #e0e0e7;
+    --light-color: #b0b0c0;
+    --dark-color: #52505e;
+}
+
+/* ===> Section 1 <===*/
+.menu {
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)), url("../img/HD.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.header {
+    min-height: 10vh;
+    width: 100%;
+    background-color: #262529;
+    position: fixed;
+}
+
+.menu .cover {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 250px;
+}
+
+.menu .cover h2 {
+    color: #f0f0f0;
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+.menu .cover p {
+    color: #f0f0f0;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.menu .cover span {
+    color: var(--main-color);
+}
+
+.menu .cover .row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.menu .cover .row .send {
+    background-color: var(--main-color);
+    color: var(--lighter-color);
+    text-decoration: none;
+    padding: 10px 7px;
+    margin: 10px;
+}
+
+.menu .cover .row .send1 {
+    background-color: var(--lighter-color);
+    color: var(--main-color);
+    text-decoration: none;
+    padding: 10px 7px;
+    margin: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .menu .cover .row {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .menu .cover .row .send {
+        padding: 7px 5px;
+        margin: 5px;
+    }
+
+    .menu .cover .row .send1 {
+        padding: 7px 5px;
+        margin: 5px;
+    }
+
+    .menu .cover {
+        min-height: 90vh;
+
+    }
+
+    .menu .cover h2 {
+        color: #f0f0f0;
+        font-size: 3.5rem;
+        font-weight: 600;
+    }
+
+    .menu .cover p {
+        color: #f0f0f0;
+        font-size: 16px;
+        font-weight: 400;
+    }
+}
+
+/* ===> Section 2 <=== */
+.contain {
+    background-color: var(--lighter-color);
+}
+
+.about,
+.contact,
+.formation {
+    padding: 100px 0 100px 0;
+    width: 80%;
+    margin: auto;
+}
+
+.title {
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.about p,
+.contact p {
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.formation p {
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.row1 {
+    margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+.colonne{
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+.colonne img{
+    width: 100%;
+}
+.colonne p{
+    width: 100%;
+}
+
+/* Formulaire de contact */
+.comment-box{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    background: #f0f0f0;
+}
+.comment-box h3
+{
+  text-align: left;
+}
+.comment-form input, .comment-form textarea
+{
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+.submit{
+    border: 5px solid var(--main-color);
+    color: var(--dark-color);
+    padding: 10px;
+    margin: 10px;
+    transition: all 1s;
+}
+.submit:hover{
+background-color: var(--main-color);
+color:  #fff;
+}
+
+/* ===>Footer<=== */
+
+.fond {
+    background: #000;
+    color: #fff;
+    padding: 15px 0 10px 0;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 400;
+}
+span {
+    color: var(--main-color);
+}
+
+/* ===>mode Responsive<=== */
+@media screen and (max-width:768px) {
+    .row1 {
+        margin: 10px;
+        flex-direction: column;
+    }
+
+    .footer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer p {
+        color: #fff;
+        font-size: 10px;
+    }
+}
