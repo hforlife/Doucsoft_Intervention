@@ -1,86 +1,72 @@
 <?php
-use App\Http\Controllers\CrudController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EtudiantController;
-use App\Http\Controllers\FormationController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RegisterController;
+
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\RapportController;
+use App\Http\Controllers\Admin\TypeInterventionController;
+use App\Http\Controllers\auth\AgentController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\auth\SupController;
+use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\VueController;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Models\Role;
 
 // Accueil
-Route::view('/', 'welcome'); // Page d'ouverture
-Route::view('format', 'home/formation'); // Affiche l'ensemble des formations
-Route::view('about', 'home/about'); // Affiche la page à propos
-Route::view('index', 'home/index'); // Affiche la page d'accueil
+Route::view('/', 'welcome')->name('home'); // Page d'accueil
+Route::view('/login', 'auth/authentication-login')->name('login'); // Vue de la page de connexion
+Route::post('/login', [AuthController::class, 'login'])->name('login.post'); // Connexion
 
-Route::get('article_list', [HomeController::class, 'lister_article']);
-Route::get('article', [EtudiantController::class, 'add']);
-Route::get('format', [HomeController::class, 'lister_format']);
-Route::get('article/{id}', [HomeController::class, 'article']);
 
-// Include Route pour l'accueil
-Route::view('header', 'home/include/header');
-Route::view('footer', 'home/include/footer');
 
-// Vue des pages d'Authentification
-Route::view('register', 'pages/register');
-Route::view('login', 'pages/login');
+// Tableau de Bord
+Route::get('/home-admin', [DashboardController::class, 'index'])->name('admin.dashboard'); // Vue DashBoard
+Route::get('/user', [UserController::class, 'index'])->name('admin.users'); // Liste des utilisateurs
 
-// Méthode des pages d'Authentification
-Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [RegisterController::class, 'login']);
-Route::get('sign_out', [RegisterController::class, 'sign_out']);
-Route::get('getA', [RegisterController::class, 'getA']);
+// Type d'intervention
+Route::get('/type-int-admin', [TypeInterventionController::class, 'index'])->name('admin.type_intervention.index'); // Liste des types d'interventions
+Route::get('/add-type-int-admin', [VueController::class, 'typeintaddview'])->name('admin.type_intervention.create'); // Page d'ajout de type d'intervention
+Route::post('/add-type-send-admin', [TypeInterventionController::class, 'store'])->name('admin.type_intervention.store'); // Ajouter un type d'intervention
+Route::get('/edit-type-int-admin/{id}', [TypeInterventionController::class, 'edit'])->name('admin.type_intervention.edit'); // Modifier un type d'intervention
+Route::post('/edit-type-send-admin/{id}', [TypeInterventionController::class, 'update'])->name('admin.type_intervention.update'); // Envoyer modification
+Route::get('/del-type-int-admin/{id}', [TypeInterventionController::class, 'destroy'])->name('admin.type_intervention.delete'); // Supprimer un type d'intervention
 
-// Route pour l'adhérent
-Route::group(['middleware' => ['role:adherent']], function () {
-    // Gestion du Profil
-    Route::view('profil', 'pages/profil');
-    Route::view('edit', 'pages/update-profil');
-});
+// Gestion Utilisateur
 
-// Route pour le formateur (avec le middleware role:formateur)
-// Route::group(['middleware' => ['role:formateur']], function () {
-Route::view('formateur', 'Formateur/formateur');
-Route::view('f-dashboard', 'Formateur/include/dashboard');
-Route::view('f-formation', 'Formateur/form-form');
-Route::view('f-progression', 'Formateur/form-prog');
-Route::view('f-certificat', 'Formateur/form-cert');
-Route::view('f-etudiant', 'Formateur/form-etd');
-// });
+// Admin
+Route::get('/addadmin', [UserController::class, 'show'])->name('admin.create'); // Vue pour ajouter un admin
+Route::post('/add-admin', [UserController::class, 'store'])->name('admin.store'); // Ajouter un admin
+Route::get('/edit-admin/{id}', [UserController::class, 'edit'])->name('admin.edit'); //Afficher Admin
+Route::post('/edit-admin-post/{id}', [UserController::class, 'update']); //Modifier Admin
+Route::get('/admin-del/{id}', [UserController::class, 'destroy'])->name('admin.delete'); // Supprimer un admin
 
-// Route pour l'admin (avec le middleware role:admin)
-// Route::group(['middleware' => ['role:admin']], function () {
-// Vue des différentes fonctionnalités de l'admin
-Route::view('admin', 'Admin/admin'); // Route pour l'admin
-Route::view('a-dashboard', 'Admin/include/dashboard'); // Vue pour le tableau de bord
-Route::view('a-progression', 'Admin/admin-prog'); // Vue pour la progression
-Route::view('a-formation', 'Admin/admin-form'); // Vue pour les formations
-Route::view('a-formateur', 'Admin/admin-f'); // Vue pour les utilisateurs
-Route::view('a-certificat', 'Admin/admin-cert'); // Vue pour les certifications
+// Agent
+Route::get('/addagent', [AgentController::class, 'index'])->name('agent.create'); // Vue pour ajouter un agent
+Route::post('/add-agent', [AgentController::class, 'store'])->name('agent.store'); // Ajouter un agent
+Route::get('/edit-agent/{id}', [AgentController::class, 'edit'])->name('agent.edit'); //Afficher Agent
+Route::post('/edit-agent-post/{id}', [AgentController::class, 'update']); //Modifier Agent
+Route::get('/agent-del/{id}', [AgentController::class, 'destroy'])->name('agent.delete'); // Supprimer un agent
 
-// Méthodes utilisées chez l'administrateur
-Route::get('admin', [DashboardController::class, 'total_formation']); // Affiche le total des éléments de la BD
-Route::get('a-formation', [FormationController::class, 'lister_Formation']); // Affiche l'ensemble des formations
-Route::get('a-etudiant', [EtudiantController::class, 'list']); // Affiche l'ensemble des adhérents
-Route::get('a-formateur', [CrudController::class, 'lister_formateur']); // Affiche l'ensemble des formateurs et admins
+// Sup
+Route::get('/addsup', [SupController::class, 'index'])->name('sup.create'); // Vue pour ajouter un superviseur
+Route::post('/add-sup', [SupController::class, 'store'])->name('sup.store'); // Ajouter un superviseur
+Route::get('/edit-sup/{id}', [SupController::class, 'edit'])->name('admin.edit'); //Afficher Sup
+Route::post('/edit-sup-post/{id}', [SupController::class, 'update']); //Modifier Sup
+Route::get('/sup-del/{id}', [SupController::class, 'destroy'])->name('sup.delete'); // Supprimer un superviseur
 
-// Vue pour la gestion des opérations
-Route::view('add-formateur', 'Admin/fonction/add-formateur'); // Ajout de formateur
-Route::view('upd-formateur', 'Admin/fonction/update-formateur'); // Mise à jour de formateur
-Route::view('upd-formation', 'Admin/fonction/update-formation'); // Mise à jour de formation
+//Rapport
+Route::get('/feedback', [DashboardController::class, 'feedback'])->name('admin.feedback.index');
+Route::get('/addfeedback', [VueController::class, 'addfeedback'])->name('admin.feedback.create');
+Route::post('/add-feedback', [RapportController::class, 'store'])->name('admin.feedback.store');
 
-// Opérations de gestion des formations
-Route::get('add-formation', [FormationController::class, 'create']);
-Route::post('add-formation', [FormationController::class, 'ajouter_formation']);
-Route::get('delete-formation/{id}', [FormationController::class, 'supprimer_formation']);
-Route::get('update-formation/{id}', [FormationController::class, 'modifier_formation']);
-Route::post('update-traitement_formation', [FormationController::class, 'modifier_formation_traitement']);
+//Intervention
+Route::get('/inter', [DashboardController::class, 'intervention'])->name('admin.inter.index');
+Route::get('/add-inter', [VueController::class, 'addint'])->name('admin.inter.store'); // Page d'ajout de type d'intervention
 
-// Opérations de gestion des utilisateurs
-Route::post('add-formateur', [CrudController::class, 'ajouter_formateur']);
-Route::get('delete-formateur/{id}', [CrudController::class, 'supprimer_formateur']);
-Route::get('update-formateur/{id}', [CrudController::class, 'modifier_formateur']);
-Route::post('update-traitement', [CrudController::class, 'modifier_formateur_traitement']);
-// });
+// Profil
+Route::get('/profil', [ProfilController::class, 'index'])->name('profile'); // Déconnexion
+
+// Déconnexion
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout'); // Déconnexion
+
+
+
