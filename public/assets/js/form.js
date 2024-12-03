@@ -65,82 +65,90 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Attacher la fonction `addInfoRow` au bouton "Ajouter une ligne"
     document
-        .querySelector("button.btn-primary")
+        .querySelector("button#addInfoRow")
         .addEventListener("click", (e) => {
             e.preventDefault();
             addInfoRow();
         });
+        // Attacher la fonction `addChecklistRow` au bouton "Ajouter une ligne"
+    document
+    .querySelector("button#addChecklistRow")
+    .addEventListener("click", (e) => {
+        e.preventDefault();
+        addChecklistRow();
     });
+});
 
+function addInfoRow() {
+    const table = document.getElementById("infoTable");
+    const rowCount = table.rows.length;
+    const row = table.insertRow(rowCount);
 
-    // Fonction pour ajouter une ligne dans la checklist
-    function addChecklistRow() {
-        const table = document.getElementById("checklistTable");
-        const row = table.insertRow(table.rows.length);
+    // Cellule Numéro
+    const cell1 = row.insertCell(0);
+    cell1.innerHTML = rowCount;
 
-    // Cellule Tâches
-        const cell1 = row.insertCell(0);
-        cell1.innerHTML =
-            '<input type="text" placeholder="Ajouter une tâche..." class="required form-control">';
+    console.log(rowCount)
+    // Cellule Services
+    const cell2 = row.insertCell(1);
+    cell2.innerHTML = `<input name="data[${
+        rowCount
+    }][serviceDescription]" type="text" class="form-control" placeholder="Description du Service">`;
 
-    // Cellule Check
-        const cell2 = row.insertCell(1);
-        cell2.innerHTML = '<input type="checkbox" class="required">';
-    }
-
-    function addInfoRow() {
-        const table = document.getElementById("infoTable");
-        const rowCount = table.rows.length;
-        const row = table.insertRow(rowCount);
-
-        // Cellule Numéro
-        const cell1 = row.insertCell(0);
-        cell1.innerHTML = rowCount;
-
-        // Cellule Services
-        const cell2 = row.insertCell(1);
-        cell2.innerHTML = '<input name="serviceDescription[]" type="text" class="form-control" placeholder="Description du Service">';
-
-        // Cellule Risque
-        const cell3 = row.insertCell(2);
-        cell3.innerHTML = `
+    // Cellule Risque
+    const cell3 = row.insertCell(2);
+    cell3.innerHTML = `
     <div class="risk-check">
         <label>
-            <input type="radio" name="riskLevel${rowCount + 1}" value="high">
+            <input type="radio" name="data[${rowCount }][riskLevel${
+                rowCount 
+    }]" value="high">
             <div class="circle red" title="Élevé"></div>
         </label>
         <label>
-            <input type="radio" name="riskLevel${rowCount + 1}" value="medium">
+            <input type="radio" name="data[${rowCount }][riskLevel${
+                rowCount 
+    }]" value="medium">
             <div class="circle orange" title="Moyen"></div>
         </label>
         <label>
-            <input type="radio" name="riskLevel${rowCount + 1}" value="low">
+            <input type="radio" name="data[${rowCount }][riskLevel${
+                rowCount 
+    }]" value="low">
             <div class="circle green" title="Faible"></div>
         </label>
     </div>
 `;
 
-        // Cellule Observations
-        const cell4 = row.insertCell(3);
-        cell4.innerHTML = '<input name="observation[]" type="text" class="form-control" placeholder="Observation">';
-
-        // Cellule Check
-        const cell5 = row.insertCell(4);
-        cell5.innerHTML = '<label class="customcheckbox mb-3"> <input type="checkbox" name="completed[]"><span class="checkmark"></span></label>';
-    }
-
-
-    // Fonction pour ajouter une ligne dans la checklist
-    function addChecklistRow() {
-        const table = document.getElementById("checklistTable");
-        const row = table.insertRow(table.rows.length);
-
-    // Cellule Tâches
-        const cell1 = row.insertCell(0);
-        cell1.innerHTML =
-            '<input type="text" placeholder="Ajouter une tâche..." class="required form-control">';
+    // Cellule Observations
+    const cell4 = row.insertCell(3);
+    cell4.innerHTML = `<textarea name="data[${
+        rowCount 
+    }][observation]" id="observation" class="form-control" placeholder="Observation"
+                                                            cols="30" required></textarea>`;
 
     // Cellule Check
-        const cell2 = row.insertCell(1);
-        cell2.innerHTML = '<input type="checkbox" class="required">';
-    }
+    const cell5 = row.insertCell(4);
+    cell5.innerHTML = `<label class="customcheckbox mb-3"> <input type="checkbox" name="data[${
+        rowCount 
+    }][completed]"><span class="checkmark"></span></label>`;
+}
+
+// Fonction pour ajouter une ligne dans la checklist
+function addChecklistRow() {
+    const table = document.getElementById("checklistTable");
+    const rowCount = table.rows.length;
+    const row = table.insertRow(rowCount);
+
+    // Cellule Tâches
+    const cell1 = row.insertCell(0);
+    cell1.innerHTML = `<input type="text" placeholder="Ajouter une tâche..." name="data[${
+        rowCount 
+    }][tache]" class="required form-control">`;
+
+    // Cellule Check
+    const cell2 = row.insertCell(1);
+    cell2.innerHTML = `<input type="checkbox" name="data[${
+        rowCount 
+    }][check]" class="required">`;
+}

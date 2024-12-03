@@ -44,7 +44,7 @@
               <p class="text-muted mt-4 mb-4" style="decoration:uppercase;">
                 Le serveur a rencontré un problème inattendu qui l'a empêché de traiter la requête.
               </p>
-              <a href="/home-admin" class="
+              <a href="/home" class="
                   btn btn-danger btn-rounded
                   waves-effect waves-light
                   mb-5

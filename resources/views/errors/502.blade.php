@@ -44,7 +44,7 @@
               <p class="text-muted mt-4 mb-4" style="decoration:uppercase;">
                 Le serveur a reçu une réponse invalide d'un autre serveur agissant en tant que passerelle ou proxy.
               </p>
-              <a href="/home-admin" class="
+              <a href="/home" class="
                   btn btn-danger btn-rounded
                   waves-effect waves-light
                   mb-5

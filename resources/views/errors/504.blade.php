@@ -44,7 +44,7 @@
               <p class="text-muted mt-4 mb-4" style="decoration:uppercase;">
                 Un serveur agissant en tant que passerelle ou proxy n'a pas reçu de réponse à temps d'un autre serveur.
               </p>
-              <a href="/home-admin" class="
+              <a href="/home" class="
                   btn btn-danger btn-rounded
                   waves-effect waves-light
                   mb-5

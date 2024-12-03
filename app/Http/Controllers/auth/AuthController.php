@@ -18,13 +18,13 @@ class AuthController extends Controller
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/home-admin');
+            return redirect()->intended('/home');
         } elseif (Auth::guard('sup')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/home-admin');
+            return redirect()->intended('/home');
         } elseif (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/home-admin');
+            return redirect()->intended('/home');
         }
 
         return redirect()->back()->withErrors([

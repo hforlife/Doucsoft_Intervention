@@ -44,7 +44,7 @@
               <p class="text-muted mt-4 mb-4" style="decoration:uppercase;">
                 La requête envoyée au serveur est mal formée ou invalide.
               </p>
-              <a href="/home-admin" class="
+              <a href="/home" class="
                   btn btn-danger btn-rounded
                   waves-effect waves-light
                   mb-5
@@ -80,7 +80,7 @@
         <script>
           $(".preloader").fadeOut();
         </script>
-      
-    
+
+
     </body>
 </html>

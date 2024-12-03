@@ -11,7 +11,7 @@
     <meta name="description"
         content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
     <meta name="robots" content="noindex,nofollow" /> --}}
-    <title>Gestion Utilisateur || Interventions</title>
+    <title>DoucSoft Intervention || Gestion des Utilisateurs</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
     <!-- Custom CSS -->
@@ -50,7 +50,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="{{ route('admin.dashboard')  }}">
+                    <a class="navbar-brand" href="{{ route('dashboard')  }}">
                         <!-- Logo icon -->
                         <img src="/assets/images/doucsoft-white.png" alt="homepage" class="light-logo" width="220" />
                         {{-- <b class="logo-icon ps-2">
@@ -266,7 +266,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated"
                                 aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                <a class="dropdown-item" href="/profil"><i
                                         class="mdi mdi-account me-1 ms-1"></i> Mon Profil</a>
                                 <!-- Lost -->
                                 <div class="dropdown-divider"></div>
@@ -278,7 +278,7 @@
                                     Déconnexion</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="ps-4 p-10">
-                                    <a href="javascript:void(0)"
+                                    <a href="/profil"
                                         class="btn btn-sm btn-success btn-rounded text-white">Voir Profil</a>
                                 </div>
                             </ul>
@@ -302,31 +302,37 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.dashboard') }}"
+                      <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard') }}"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Tableau de Bord</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.inter.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('inter.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-alert"></i><span
                                     class="hide-menu">Interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.type_intervention.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('type_int.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
                                     class="hide-menu">Types D'interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.users') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dom.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-domain"></i><span
+                                    class="hide-menu">Domaines D'interventions</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('factory.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-factory"></i><span
+                                    class="hide-menu">Entreprise</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users') }}"
                                 aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span
                                     class="hide-menu">Utilisateur</span></a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.feedback.index') }}"
-                                aria-expanded="false"><i class="mdi mdi-file-document"></i><span
-                                    class="hide-menu">Rapports</span></a>
-                        </li>
+                       {{-- Rapports Supprimé --}}
 
                     </ul>
                 </nav>
@@ -351,7 +357,7 @@
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
                                         Gestion Utilisateur
                                     </li>
@@ -431,13 +437,13 @@
                                                 <td>{{ $admins->name }}</td>
                                                 <td>{{ $admins->email }}</td>
                                                 <td>
-                                                    <a href="{{ url('/admin-del/' . $admins->id) }}" type="button"
-                                                        class="btn btn-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </a>
-                                                    <a href="{{ url('/edit-admin/' . $admins->id) }}" type="button"
+                                                    <a href="{{ url('/editadmin/' . $admins->id) }}" type="button"
                                                         class="btn btn-primary">
                                                         <i class="mdi mdi-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ url('/deladmin/' . $admins->id) }}" type="button"
+                                                        class="btn btn-danger">
+                                                        <i class="mdi mdi-delete"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -446,6 +452,7 @@
                                             $ide++;
                                         @endphp
                                     @endforeach
+                                    {{ $admin->links() }}
 
 
                                 </table>
@@ -491,13 +498,13 @@
                                                 <td>{{ $sups->address }}</td>
                                                 <td>{{ $sups->number }}</td>
                                                 <td>
-                                                    <a href="{{ url('/sup-del/' . $sups->id) }}" type="button"
-                                                        class="btn btn-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </a>
-                                                    <a href="{{ url('/edit-sup/' . $sups->id) }}" type="button"
+                                                    <a href="{{ url('/editsup/' . $sups->id) }}" type="button"
                                                         class="btn btn-primary">
                                                         <i class="mdi mdi-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ url('/delsup/' . $sups->id) }}" type="button"
+                                                        class="btn btn-danger">
+                                                        <i class="mdi mdi-delete"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -507,6 +514,7 @@
                                             $ide++;
                                         @endphp
                                     @endforeach
+                                    {{ $sup->links() }}
 
                                 </table>
                             </div>
@@ -549,13 +557,13 @@
                                                 <td>{{ $agents->address }}</td>
                                                 <td>{{ $agents->number }}</td>
                                                 <td>
-                                                    <a href="{{ url('/agent-del/' . $agents->id) }}"
-                                                        type="button" class="btn btn-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </a>
-                                                    <a href="{{ url('/edit-agent/' . $agents->id) }}"
+                                                    <a href="{{ url('/editagent/' . $agents->id) }}"
                                                         type="button" class="btn btn-primary">
                                                         <i class="mdi mdi-pencil"></i>
+                                                    </a>
+                                                    <a href="{{ url('/delagent/' . $agents->id) }}"
+                                                        type="button" class="btn btn-danger">
+                                                        <i class="mdi mdi-delete"></i>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -565,6 +573,7 @@
                                             $ide++;
                                         @endphp
                                     @endforeach
+                                    {{ $agent->links() }}
 
                                 </table>
                             </div>

@@ -4,26 +4,14 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {{-- <meta name="keywords"
-        content="Doucsoft, admin tableau de bord, html css tableau de bord, wintervention, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template" />
-    <meta name="description"
-        content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
-    <meta name="robots" content="noindex,nofollow" /> --}}
-    <title>Rapports || Interventions</title>
+    <title>DoucSoft Intervention || Domaines d'Interventions</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
     <!-- Custom CSS -->
     <link href="/assets/libs/flot/css/float-chart.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="/assets/dist/css/style.min.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:/ -->
-    <!--[if lt IE 9]>
-      <script src="https:/oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https:/oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
@@ -50,29 +38,10 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="{{ route('admin.dashboard')  }}">
+                    <a class="navbar-brand" href="{{ route('dashboard')  }}">
                         <!-- Logo icon -->
                         <img src="/assets/images/doucsoft-white.png" alt="homepage" class="light-logo" width="220" />
-                        {{-- <b class="logo-icon ps-2">
-                            <!--You can put here icon as well / <i class="wi wi-sunset"></i> /-->
-                            <!-- Dark Logo icon -->
-                            <img src="/assets/images/logo-icon.png" alt="homepage" class="light-logo" width="25" />
-                        </b>
-                        
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span class="logo-text ms-2">
-                            <!-- dark Logo text -->
-                            <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" />
-                        </span> --}}
-                        <!-- Logo icon -->
-                        <!-- <b class="logo-icon"> -->
-                        <!--You can put here icon as well / <i class="wi wi-sunset"></i> /-->
-                        <!-- Dark Logo icon -->
-                        <!-- <img src="/assets/images/logo-text.png" alt="homepage" class="light-logo" /> -->
 
-                        <!-- </b> -->
-                        <!--End Logo icon -->
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -266,7 +235,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated"
                                 aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                <a class="dropdown-item" href="/profil"><i
                                         class="mdi mdi-account me-1 ms-1"></i> Mon Profil</a>
                                 <!-- Lost -->
                                 <div class="dropdown-divider"></div>
@@ -278,7 +247,7 @@
                                         class="fa fa-power-off me-1 ms-1"></i> Déconnexion</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="ps-4 p-10">
-                                    <a href="javascript:void(0)"
+                                    <a href="/profil"
                                         class="btn btn-sm btn-success btn-rounded text-white">Voir Profil</a>
                                 </div>
                             </ul>
@@ -302,30 +271,35 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.dashboard') }}"
+                       <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard') }}"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Tableau de Bord</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.inter.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('inter.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-alert"></i><span
                                     class="hide-menu">Interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.type_intervention.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('type_int.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
                                     class="hide-menu">Types D'interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.users') }}"
-                                aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span
-                                    class="hide-menu">Utilisateur</span></a>
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dom.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-domain"></i><span
+                                    class="hide-menu">Domaines D'interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.feedback.index') }}"
-                                aria-expanded="false"><i class="mdi mdi-file-document"></i><span
-                                    class="hide-menu">Rapports</span></a>
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('factory.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-factory"></i><span
+                                    class="hide-menu">Entreprise</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users') }}"
+                                aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span
+                                    class="hide-menu">Utilisateur</span></a>
                         </li>
 
                     </ul>
@@ -347,13 +321,13 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Rapport</h4>
+                        <h4 class="page-title">Domaines d'Intervention</h4>
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                      Rapport
+                      Domaines d'Intervention
                     </li>
                                 </ol>
                             </nav>
@@ -371,30 +345,41 @@
                 <!-- ============================================================== -->
                 <!-- Sales Cards  -->
                 <!-- ============================================================== -->
-            
+
 
                  <!-- ============================================================== -->
                 <!-- Debut Tableau -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
+                        {{-- Gestion Erreurs --}}
+                         @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="alert alert-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        {{-- Fin Gestion Erreurs --}}
                 <!-- ============================================================== -->
                 <!-- Tableau 1 -->
                 <!-- ============================================================== -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-0">Listes Rapports</h5>
+                                <h5 class="card-title mb-0">Listes Domaines</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nom Rapport</th>
-                                            <th scope="col">Type d'intervention</th>
-                                            <th scope="col">Nom intervention</th>
-                                            <th scope="col">Contenu</th>
-                                            <th scope="col">Status</th>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Type d'Intervention</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -402,36 +387,37 @@
                                         $ide = 1;
                                     @endphp
 
-                                    @foreach ($feedback as $feedbacks)
+                                    @foreach ($entrys as $entry)
                                         <tbody class="customtable">
                                             <tr>
                                                 <td>{{ $ide }}</td>
-                                                <td>{{ $feedbacks->name }}</td>
-                                                <td>{{ $feedbacks->intervention_type }}</td>
-                                                <td>{{ $feedbacks->intervention }}</td>
-                                                <td>{{ $feedbacks->content }}</td>
-                                                <td>
-                                                    <a href=""
-                                                        type="button" class="btn btn-primary">
-                                                        <i class="mdi mdi-verified"></i>
-                                                    </a>
-                                                    <a href=""
-                                                        type="button" class="btn btn-danger">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </a>
-                                                </td>
+                                                <td>{{ $entry->name }}</td>
+                                                <td>{{ $entry->description }}</td>
+                                                <td>{{ $entry->intervention_type->name }}</td>
+                                               <td>
+                                                <a href="{{ url('/editdomain/' . $entry->id) }}"
+                                                    type="button" class="btn btn-primary">
+                                                    <i class="mdi mdi-pencil"></i>
+                                                </a>
+                                                <a href="{{ url('/deldomain/' . $entry->id) }}"
+                                                    type="button" class="btn btn-danger">
+                                                    <i class="mdi mdi-delete"></i>
+                                                </a>
+                                            </td>
                                             </tr>
                                         </tbody>
                                     @php
                                         $ide++;
                                     @endphp
                                     @endforeach
+                                    {{ $entrys->links() }}
 
 
                                 </table>
                             </div>
                         </div>
-                        
+                        <a class="btn btn-primary" href="/adddomain"><i class="fa fa-plus" aria-hidden="true"></i></a>
+
                     </div>
                 </div>
        <!-- ============================================================== -->

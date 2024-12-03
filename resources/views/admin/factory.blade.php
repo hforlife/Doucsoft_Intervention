@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DoucSoft Intervention || Gestion des Interventions</title>
+    <title>DoucSoft Intervention || Gestion des Entreprises</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
     <!-- Custom CSS -->
@@ -41,7 +41,7 @@
                     <a class="navbar-brand" href="{{ route('dashboard')  }}">
                         <!-- Logo icon -->
                         <img src="/assets/images/doucsoft-white.png" alt="homepage" class="light-logo" width="220" />
-                       
+
                     </a>
                     <!-- ============================================================== -->
                     <!-- End Logo -->
@@ -271,7 +271,7 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                      <li class="sidebar-item">
+                       <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard') }}"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Tableau de Bord</span></a>
@@ -321,13 +321,13 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Rapport</h4>
+                        <h4 class="page-title">Entrepriss</h4>
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                      Rapport
+                      Entreprises
                     </li>
                                 </ol>
                             </nav>
@@ -370,18 +370,19 @@
                 <!-- ============================================================== -->
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-0">Listes Rapports</h5>
+                                <h5 class="card-title mb-0">Listes Entreprises</h5>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Nom Intervention</th>
-                                            <th scope="col">Type Intervention</th>
-                                            <th scope="col">Entreprise</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Agent</th>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col">Forme Juridique</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Adresse</th>
+                                            <th scope="col">N°Tel</th>
+                                            <th scope="col">N°Responsable</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -389,25 +390,22 @@
                                         $ide = 1;
                                     @endphp
 
-                                    @foreach ($inters as $inter)
+                                    @foreach ($entrys as $entry)
                                         <tbody class="customtable">
                                             <tr>
                                                 <td>{{ $ide }}</td>
-                                                <td>{{ $inter->name }}</td>
-                                                <td>{{ $inter->intervention_type}}</td>
-                                                <td>{{ $inter->factory }}</td>
-                                                <td>{{ $inter->time }}</td>
-                                               <td>{{ $inter->agent }}</td>
+                                                <td>{{ $entry->name }}</td>
+                                                <td>{{ $entry->status }}</td>
+                                                <td>{{ $entry->description }}</td>
+                                                <td>{{ $entry->address }}</td>
+                                               <td>{{ $entry->n°tel }}</td>
+                                               <td>{{ $entry->n°responsable }}</td>
                                                <td>
-                                                <a href="{{ url('/editinter/' . $inter->id) }}"
+                                                <a href="{{ url('/editfactory/' . $entry->id) }}"
                                                     type="button" class="btn btn-primary">
                                                     <i class="mdi mdi-pencil"></i>
                                                 </a>
-                                                <a href="{{ url('/PDF/') }}"
-                                                    type="button" class="btn btn-warning">
-                                                    <i class="mdi mdi-file-document"></i>
-                                                </a>
-                                                <a href="{{ url('/delinter/' . $inter->id) }}"
+                                                <a href="{{ url('/delfactory/' . $entry->id) }}"
                                                     type="button" class="btn btn-danger">
                                                     <i class="mdi mdi-delete"></i>
                                                 </a>
@@ -418,13 +416,13 @@
                                         $ide++;
                                     @endphp
                                     @endforeach
-                                    {{ $inters->links() }}
+                                    {{ $entrys->links() }}
 
 
                                 </table>
                             </div>
                         </div>
-                        <a class="btn btn-primary" href="/addinter">Ajouter Intervention</a>
+                        <a class="btn btn-primary" href="/addfactory">Ajouter Entreprise</a>
 
                     </div>
                 </div>

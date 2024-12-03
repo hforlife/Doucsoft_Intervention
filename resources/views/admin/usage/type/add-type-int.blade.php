@@ -11,7 +11,7 @@
     <meta name="description"
         content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework" />
     <meta name="robots" content="noindex,nofollow" /> --}}
-    <title>Types d'Interventions || Interventions</title>
+    <title>Doucsoft Intervention || Ajouter Types d'Interventions</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
     <!-- Custom CSS -->
@@ -50,7 +50,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="{{ route('admin.dashboard')  }}">
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">
                         <!-- Logo icon -->
                         <img src="/assets/images/doucsoft-white.png" alt="homepage" class="light-logo" width="220" />
                         {{-- <b class="logo-icon ps-2">
@@ -266,7 +266,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated"
                                 aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                <a class="dropdown-item" href="/profil"><i
                                         class="mdi mdi-account me-1 ms-1"></i> Mon Profil</a>
                                 <!-- Lost -->
                                 <div class="dropdown-divider"></div>
@@ -274,11 +274,11 @@
                                         class="mdi mdi-settings me-1 ms-1"></i>
                                     Parametre du compte</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout"><i
-                                        class="fa fa-power-off me-1 ms-1"></i> Déconnexion</a>
+                                <a class="dropdown-item" href="/logout"><i class="fa fa-power-off me-1 ms-1"></i>
+                                    Déconnexion</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="ps-4 p-10">
-                                    <a href="javascript:void(0)"
+                                    <a href="/profil"
                                         class="btn btn-sm btn-success btn-rounded text-white">Voir Profil</a>
                                 </div>
                             </ul>
@@ -302,31 +302,37 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.dashboard') }}"
+                      <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dashboard') }}"
                                 aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Tableau de Bord</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.inter.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('inter.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-alert"></i><span
                                     class="hide-menu">Interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.type_intervention.index') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('type_int.index') }}"
                                 aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
                                     class="hide-menu">Types D'interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.users') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('dom.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-domain"></i><span
+                                    class="hide-menu">Domaines D'interventions</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('factory.index') }}"
+                                aria-expanded="false"><i class="mdi mdi-factory"></i><span
+                                    class="hide-menu">Entreprise</span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users') }}"
                                 aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span
                                     class="hide-menu">Utilisateur</span></a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/"
-                                aria-expanded="false"><i class="mdi mdi-file-document"></i><span
-                                    class="hide-menu">Rapports</span></a>
-                        </li>
+                       {{-- Rapports Supprimé --}}
 
                     </ul>
                 </nav>
@@ -351,13 +357,13 @@
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/home-admin">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="/home">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                                        <a href="/type-int-admin"> Types d'interventions</a>
-                                         </li>
-                                         <li class="breadcrumb-item active" aria-current="page">
-                                            Ajouter une Interventions
-                                             </li>
+                                        <a href="/type-int"> Types d'interventions</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        Ajouter une Interventions
+                                    </li>
                                 </ol>
                             </nav>
                         </div>
@@ -390,103 +396,106 @@
                     <!-- Column -->
                 </div>
 
-                 <!-- ============================================================== -->
+                <!-- ============================================================== -->
                 <!-- Debut Tableau -->
                 <!-- ============================================================== -->
                 <div class="row">
                     <div class="col-12">
                         @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li class="alert alert-danger">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                <!-- ============================================================== -->
-                <!-- Tableau 1 -->
-                <!-- ============================================================== -->
-                <div class="card">
-                    <form class="form-horizontal" action="/add-type-send-admin" method="post">
-                        @csrf
-                      <div class="card-body">
-                        <h4 class="card-title">Info Type Interventions</h4>
-                        <div class="form-group row">
-                          <label for="fname" class="col-sm-3 text-end control-label col-form-label">Nom</label>
-                          <div class="col-sm-9">
-                            <input type="text" name="name" class="form-control" id="fname" placeholder="Nom du type">
-                          </div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="alert alert-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <!-- ============================================================== -->
+                        <!-- Tableau 1 -->
+                        <!-- ============================================================== -->
+                        <div class="card">
+                            <form class="form-horizontal" action="/add-type-int" method="post">
+                                @csrf
+                                <div class="card-body">
+                                    <h4 class="card-title">Info Type Interventions</h4>
+                                    <div class="form-group row">
+                                        <label for="fname"
+                                            class="col-sm-3 text-end control-label col-form-label">Nom</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="name" class="form-control" id="fname"
+                                                placeholder="Nom du type">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cono1"
+                                            class="col-sm-3 text-end control-label col-form-label">Description</label>
+                                        <div class="col-sm-9">
+                                            <textarea class="form-control" name="description" placeholder="Faites une brève description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="cono1" class="col-sm-3 text-end control-label col-form-label">Description</label>
-                          <div class="col-sm-9">
-                            <textarea class="form-control" name="description"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="border-top">
-                        <div class="card-body">
-                          {{-- <button type="submit" class="btn btn-primary">
+                        <div class="border-top">
+                            <div class="card-body">
+                                {{-- <button type="submit" class="btn btn-primary">
                             Ajouter
                         </button> --}}
-                        <input type="submit" value="Ajouter" class="btn btn-primary">
+                                <input type="submit" value="Ajouter" class="btn btn-primary">
+                            </div>
                         </div>
-                      </div>
-                    </form>
-                  </div>
+                        </form>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-       <!-- Fin Tableau -->
-       <!-- ============================================================== -->
-
-                <!-- ============================================================== -->
-                <!-- footer -->
-                <!-- ============================================================== -->
-                <footer class="footer text-center">
-                    Tous droit réservé par DoucSoft-Technlogie. Designé et Developpé par
-                    <a href="https://www.Doucsoft.com">Doucsoft</a>.
-                </footer>
-                <!-- ============================================================== -->
-                <!-- End footer -->
-                <!-- ============================================================== -->
             </div>
             <!-- ============================================================== -->
-            <!-- End Page wrapper  -->
+            <!-- Fin Tableau -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+                Tous droit réservé par DoucSoft-Technlogie. Designé et Developpé par
+                <a href="https://www.Doucsoft.com">Doucsoft</a>.
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
             <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Wrapper -->
+        <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap tether Core JavaScript -->
-        <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-        <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
-        <!--Wave Effects -->
-        <script src="/assets/dist/js/waves.js"></script>
-        <!--Menu sidebar -->
-        <script src="/assets/dist/js/sidebarmenu.js"></script>
-        <!--Custom JavaScript -->
-        <script src="/assets/dist/js/custom.min.js"></script>
-        <!--This page JavaScript -->
-        <!-- <script src="/assets/dist/js/pages/dashboards/dashboard1.js"></script> -->
-        <!-- Charts js Files -->
-        <script src="/assets/libs/flot/excanvas.js"></script>
-        <script src="/assets/libs/flot/jquery.flot.js"></script>
-        <script src="/assets/libs/flot/jquery.flot.pie.js"></script>
-        <script src="/assets/libs/flot/jquery.flot.time.js"></script>
-        <script src="/assets/libs/flot/jquery.flot.stack.js"></script>
-        <script src="/assets/libs/flot/jquery.flot.crosshair.js"></script>
-        <script src="/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-        <script src="/assets/dist/js/pages/chart/chart-page-init.js"></script>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="/assets/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/assets/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/assets/dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="/assets/dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script src="/assets/libs/flot/excanvas.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="/assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="/assets/dist/js/pages/chart/chart-page-init.js"></script>
 </body>
 
 </html>

@@ -14,7 +14,7 @@ class TypeInterventionController extends Controller
     public function index()
     {
         //
-        $list = Intervention_Type::all();
+        $list = Intervention_Type::paginate(5);
         return view('Admin/type-int', compact('list'));
     }
 
@@ -24,6 +24,7 @@ class TypeInterventionController extends Controller
     public function create()
     {
         //
+        return view('Admin/usage/type/add-type-int');
     }
 
     /**
@@ -33,8 +34,8 @@ class TypeInterventionController extends Controller
     {
         //
         $request->validate([
-            'name'=>'required',
-            'description'=>'required'
+            'name'=>'required|string',
+            'description'=>'nullable|string'
         ]);
 
         $type = new Intervention_Type();
@@ -42,7 +43,7 @@ class TypeInterventionController extends Controller
         $type->description = $request->description;
         $type->save();
 
-        return redirect()->route('admin.type_intervention.index')->with('status', 'Ajout effectué avec succèss.');
+        return redirect()->route('type_int.index')->with('status', 'Ajout effectué avec succèss.');
     }
 
     /**
@@ -71,7 +72,7 @@ class TypeInterventionController extends Controller
         //
         $request->validate([
             'name'=>'required|string',
-            'description'=>'required|string',
+            'description'=>'nullable|string',
         ]);
 
         $type = Intervention_Type::findOrFail($id);
@@ -79,7 +80,7 @@ class TypeInterventionController extends Controller
         $type->description = $request->description;
         $type->update();
 
-        return redirect()->route('admin.type_intervention.index')->with('status', 'Modification effectué avec succèss.');
+        return redirect()->route('type_int.index')->with('status', 'Modification effectué avec succèss.');
     }
 
     /**
@@ -90,6 +91,6 @@ class TypeInterventionController extends Controller
         //
         $lists = Intervention_Type::find($id);
         $lists->delete();
-        return redirect()->route('admin.type_intervention.index')->with('status', 'Suppression effectué avec succèss.');
+        return redirect()->route('type_int.index')->with('status', 'Suppression effectué avec succèss.');
     }
 }

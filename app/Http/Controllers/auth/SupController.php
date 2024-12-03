@@ -52,7 +52,7 @@ class SupController extends Controller
 
         $sup->assignRole('superviseur');
 
-        return redirect()->route('admin.users')->with('status', 'Ajout effectué avec succes.');
+        return redirect()->route('users')->with('status', 'Ajout effectué avec succes.');
     }
 
     /**
@@ -100,7 +100,7 @@ class SupController extends Controller
         $Sup->save();
 
         // Redirection avec un message de succès
-        return redirect()->route('admin.users')->with('status', 'Modification effectuée avec succès.');
+        return redirect()->route('users')->with('status', 'Modification effectuée avec succès.');
     }
 
 
@@ -112,6 +112,6 @@ class SupController extends Controller
         //
         $sups = Superviseur::find($id);
         $sups->delete();
-        return redirect()->route('admin.users')->with('status', 'Suppression effectué avec succèss.');
+        return redirect()->route('users')->with('status', 'Suppression effectué avec succèss.');
     }
 }

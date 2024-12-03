@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Interventions || Interventions</title>
+    <title>DoucSoft Intervention || Ajouter Intervention</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon.png" />
     <!-- Custom CSS -->
@@ -109,7 +109,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                    <a class="navbar-brand" href="{{ route('dashboard') }}">
                         <!-- Logo icon -->
                         <img src="/assets/images/doucsoft-white.png" alt="homepage" class="light-logo" width="220" />
                         {{-- <b class="logo-icon ps-2">
@@ -325,7 +325,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated"
                                 aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="javascript:void(0)"><i
+                                <a class="dropdown-item" href="/profil"><i
                                         class="mdi mdi-account me-1 ms-1"></i> Mon Profil</a>
                                 <!-- Lost -->
                                 <div class="dropdown-divider"></div>
@@ -337,7 +337,7 @@
                                     Déconnexion</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="ps-4 p-10">
-                                    <a href="javascript:void(0)"
+                                    <a href="/profil"
                                         class="btn btn-sm btn-success btn-rounded text-white">Voir Profil</a>
                                 </div>
                             </ul>
@@ -363,32 +363,27 @@
                     <ul id="sidebarnav" class="pt-4">
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.dashboard') }}" aria-expanded="false"><i
+                                href="{{ route('dashboard') }}" aria-expanded="false"><i
                                     class="mdi mdi-view-dashboard"></i><span class="hide-menu">Tableau de
                                     Bord</span></a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.inter.index') }}" aria-expanded="false"><i
+                                href="{{ route('inter.index') }}" aria-expanded="false"><i
                                     class="mdi mdi-alert"></i><span class="hide-menu">Interventions</span></a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.type_intervention.index') }}" aria-expanded="false"><i
+                                href="{{ route('type_int.index') }}" aria-expanded="false"><i
                                     class="mdi mdi-chart-bubble"></i><span class="hide-menu">Types
                                     D'interventions</span></a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('admin.users') }}" aria-expanded="false"><i
-                                    class="mdi mdi-account-multiple-outline"></i><span
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('users') }}"
+                                aria-expanded="false"><i class="mdi mdi-account-multiple-outline"></i><span
                                     class="hide-menu">Utilisateur</span></a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/"
-                                aria-expanded="false"><i class="mdi mdi-file-document"></i><span
-                                    class="hide-menu">Rapports</span></a>
-                        </li>
+                        {{-- Rapports Supprimé --}}
 
                     </ul>
                 </nav>
@@ -413,9 +408,9 @@
                         <div class="ms-auto text-end">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/home-admin">Accueil</a></li>
+                                    <li class="breadcrumb-item"><a href="/home">Accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                                        <a href="/type-int-admin"> Interventions</a>
+                                        <a href="/type-int"> Interventions</a>
                                     </li>
                                     <li class="breadcrumb-item active" aria-current="page">
                                         Ajouter une Interventions
@@ -436,12 +431,24 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="alert alert-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
                 <div class="card">
                     <div class="card-body wizard-content">
                         <h4 class="card-title">FICHE D'INFORMATION - ANALYSE &amp; AUDIT</h4>
                         <h6 class="card-subtitle"></h6>
-                        <form id="example-form" action="#" method="post" class="mt-5"
+                        <form id="example-form" action="/add-inter" method="post" class="mt-5"
                             novalidate="novalidate">
+                            @csrf
                             <div role="application" class="wizard clearfix" id="steps-uid-0">
                                 <div class="steps clearfix">
                                     <ul role="tablist">
@@ -451,11 +458,11 @@
                                                     class="current-info audible">current step: </span><span
                                                     class="number">1.</span> Fiche d'Information</a></li>
                                         <li role="tab" class="done" aria-disabled="false"
-                                            aria-selected="false"><a id="steps-uid-0-t-3" href="#steps-uid-0-h-3"
+                                            aria-selected="false"><a id="steps-uid-0-t-1" href="#steps-uid-0-h-1"
                                                 aria-controls="steps-uid-0-p-3"><span class="number">2.</span>
                                                 CheckList</a></li>
                                         <li role="tab" class="disabled last" aria-disabled="true"><a
-                                                id="steps-uid-0-t-3" href="#steps-uid-0-h-4"
+                                                id="steps-uid-0-t-2" href="#steps-uid-0-h-2"
                                                 aria-controls="steps-uid-0-p-3"><span class="number">3.</span>
                                                 Profil</a></li>
                                     </ul>
@@ -479,50 +486,54 @@
                                                 <tr>
                                                     <td>1</td>
                                                     <td>
-                                                        <input id="serviceDescription" name="serviceDescription[]"
-                                                            type="text" class="form-control"
-                                                            placeholder="Description du Service">
+                                                        <input id="serviceDescription"
+                                                            name="data[1][serviceDescription]" type="text"
+                                                            class="form-control" placeholder="Description du Service"
+                                                            required>
                                                     </td>
                                                     <td>
                                                         <div class="risk-check">
-                                                            <label>
-                                                                <input type="radio" value=""
-                                                                    name="riskLevel1" value="high">
+                                                            <label for="riskLevel1">
+                                                                <input type="radio" name="data[1][riskLevel1]"
+                                                                    value="high">
                                                                 <div class="circle red" title="Élevé"></div>
                                                             </label>
-                                                            <label>
-                                                                <input type="radio" value=""
-                                                                    name="riskLevel1" value="medium">
+                                                            <label for="riskLevel1">
+                                                                <input type="radio" name="data[1][riskLevel1]"
+                                                                    value="medium">
                                                                 <div class="circle orange" title="Moyen"></div>
                                                             </label>
-                                                            <label>
-                                                                <input type="radio" value=""
-                                                                    name="riskLevel1" value="low">
+                                                            <label for="riskLevel1">
+                                                                <input type="radio" name="data[1][riskLevel1]"
+                                                                    value="low">
                                                                 <div class="circle green" title="Faible"></div>
                                                             </label>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input id="observation" name="observation[]" type="text"
-                                                            class="form-control" placeholder="Observation">
+                                                        <textarea name="data[1][observation]" id="observation" class="form-control" placeholder="Observation"
+                                                            cols="30" required></textarea>
                                                     </td>
                                                     <td>
-                                                        <label class="customcheckbox mb-3">
-                                                            <input type="checkbox" name="completed[]">
+                                                        <label class="customcheckbox mb-3" for="completed">
+                                                            <input type="checkbox" name="data[1][completed]">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <button class="btn btn-primary" onclick="addInfoRow()">Ajouter une
-                                            ligne</button>
+                                        <center>
+                                            <button class="btn btn-primary" id="addInfoRow" onclick="addInfoRow()"
+                                                title="Ajouter une ligne"><i class="fa fa-plus"
+                                                    aria-hidden="true"></i></button>
+                                        </center>
                                     </section>
 
 
                                     {{-- Part 4 --}}
-                                    <h3 id="steps-uid-0-h-3" tabindex="-1" class="title">Profil</h3>
-                                    <section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-3"
+                                    <h3 id="steps-uid-0-h-1" tabindex="-1" class="title">Profil</h3>
+                                    <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1"
                                         class="body" aria-hidden="true" style="display: none;">
                                         <table class="table" id="checklistTable">
                                             <tr>
@@ -530,40 +541,55 @@
                                                 <th>Check</th>
                                             </tr>
                                             <tr>
-                                                <td><input type="text" name="tache[]" placeholder="Ajouter une tâche..."
+                                                <td><input type="text" name="data[1][tache]"
+                                                        placeholder="Ajouter une tâche..."
                                                         class="required form-control"></td>
-                                                <td><input type="checkbox" name="check[]" class="required"></td>
+                                                <td><input type="checkbox" name="data[1][check]" class="required">
+                                                </td>
                                             </tr>
                                         </table>
-                                        <button class="btn btn-primary" onclick="addChecklistRow()">Ajouter une
-                                            ligne</button>
+                                        <center>
+                                            <button class="btn btn-primary" id="addChecklistRow"
+                                                onclick="addChecklistRow()" title="Ajouter une ligne"><i
+                                                    class="fa fa-plus" aria-hidden="true"></i></button>
+                                        </center>
                                     </section>
 
                                     {{-- Part 5 --}}
-                                    <h3 id="steps-uid-0-h-4" tabindex="-1" class="title current">profile</h3>
-                                    <section id="steps-uid-0-p-4" role="tabpanel" aria-labelledby="steps-uid-0-h-4"
+                                    <h3 id="steps-uid-0-h-2" tabindex="-1" class="title current">profile</h3>
+                                    <section id="steps-uid-0-p-2" role="tabpanel" aria-labelledby="steps-uid-0-h-2"
                                         class="body current" aria-hidden="false" style="left: 0px;">
                                         <label for="name">Nom de l'Intervention *</label>
                                         <input id="name" name="name" type="text"
-                                            class="required form-control valid" aria-invalid="false">
+                                            class="required form-control valid" aria-invalid="false" required>
                                         <label for="intervention_type">Type d'Intervention *</label>
-                                        <Select id="address" name="intervention_type" class="form-control valid"
-                                            aria-invalid="false">
+                                        <Select id="intervention_type" name="intervention_type"
+                                            class="form-control valid" aria-invalid="false" required>
                                             <option value="" disabled selected>Choisissez un type d'intervention
                                             </option>
+                                            @foreach ($list1 as $lists1)
+                                                <option value="{{ $lists1->id }}">
+                                                    {{ $lists1->name }}
+                                                </option>
+                                            @endforeach
                                         </Select>
                                         <label for="factory">Entreprise *</label>
-                                        <input id="email" name="email" type="text"
-                                            class="required email form-control valid" aria-invalid="false">
+                                        <input id="factory" name="factory" type="text"
+                                            class="required form-control valid" aria-invalid="false" required>
                                         <label for="time">Date de l'Intervention</label>
-                                        <input id="address" name="time" type="Date"
-                                            class="form-control valid" aria-invalid="false">
+                                        <input id="time" name="time" type="Date"
+                                            class="form-control valid" aria-invalid="false" required>
                                         <label for="agent">Agent</label>
-                                        <Select id="address" name="agent" class="form-control valid"
-                                            aria-invalid="false">
+                                        <Select id="agent" name="agent" class="form-control valid"
+                                            aria-invalid="false" required>
                                             <option value="" disabled selected>Choisissez un Agent pour cette
                                                 Intervention
                                             </option>
+                                            @foreach ($list as $lists)
+                                                <option value="{{ $lists->id }}">
+                                                    {{ $lists->name }}
+                                                </option>
+                                            @endforeach
                                         </Select>
                                         <p>(*) Obligatoire</p>
 
@@ -576,8 +602,10 @@
                                                 role="menuitem">Précedent</a></li>
                                         <li aria-hidden="false" aria-disabled="false"><a href="#next"
                                                 role="menuitem">Suivant</a></li>
-                                        <li aria-hidden="true" style="display: none;"><a href="#finish"
+                                        <li aria-hidden="true" style="display: none;" hidden><a href="#finish"
                                                 role="menuitem">Enregistrer</a></li>
+                                        <input type="submit" value="Envoyer"
+                                            style="background: #17f; padding: 8px 10px; border:none; border-radius: 5px; color: #fff;" />
                                     </ul>
                                 </div>
                             </div>

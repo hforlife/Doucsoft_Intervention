@@ -56,7 +56,7 @@ class ProfilController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $admin = Auth::user();
+        
     }
 
     /**

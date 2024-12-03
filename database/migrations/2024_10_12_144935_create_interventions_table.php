@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('intervention_type')->constrained('intervention__types')->onDelete('cascade');
-            $table->date('time');
-            $table->foreignId('agent')->constrained('agents')->onDelete('cascade');
-            $table->json('data');
+            $table->foreignId('intervention_type_id')->constrained('intervention__types')->onDelete('cascade');
+            $table->foreignId('factory_id')->constrained('factories')->onDelete('cascade');
+            $table->dateTime('time');
+            $table->foreignId('agent_id')->constrained('agents')->onDelete('cascade');
+            $table->text('data');
             $table->timestamps();
         });
     }

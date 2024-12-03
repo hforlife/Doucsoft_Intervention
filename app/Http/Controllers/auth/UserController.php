@@ -78,7 +78,7 @@ class UserController extends Controller
         $admin->save();
 
         // Redirection avec un message de succès
-        return redirect()->route('admin.users')->with('status', 'Modification effectuée avec succès.');
+        return redirect()->route('users')->with('status', 'Modification effectuée avec succès.');
     }
 
     //DELETE
@@ -87,6 +87,6 @@ class UserController extends Controller
     {
         $admins = Admin::find($id);
         $admins->delete();
-        return redirect()->route('admin.users')->with('status', 'Suppression effectué avec succèss.');
+        return redirect()->route('users')->with('status', 'Suppression effectué avec succèss.');
     }
 }

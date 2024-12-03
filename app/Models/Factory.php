@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rapports extends Model
+class Factory extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'name',
-        'intervention_type',
-        'intervention',
+        'status',
         'description',
+        'address',
+        'n°tel',
+        'n°responsable'
     ];
 }

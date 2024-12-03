@@ -52,7 +52,7 @@ class AgentController extends Controller
 
         $agent->assignRole('agent');
 
-        return redirect()->route('admin.users')->with('status', 'Ajout effectué avec succes.');
+        return redirect()->route('users')->with('status', 'Ajout effectué avec succes.');
     }
 
     /**
@@ -96,7 +96,7 @@ class AgentController extends Controller
         $agent->save();
 
         // Redirection avec un message de succès
-        return redirect()->route('admin.users')->with('status', 'Modification effectuée avec succès.');
+        return redirect()->route('users')->with('status', 'Modification effectuée avec succès.');
     }
 
 
@@ -108,6 +108,6 @@ class AgentController extends Controller
         //
         $agents = Agent::find($id);
         $agents->delete();
-        return redirect()->route('admin.users')->with('status', 'Suppression effectué avec succèss.');
+        return redirect()->route('users')->with('status', 'Suppression effectué avec succèss.');
     }
 }
