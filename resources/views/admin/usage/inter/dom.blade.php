@@ -36,8 +36,6 @@
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
-
-        {{-- Gestion de erreurs --}}
         @if (session('status'))
             <div class="alert alert-success">
                 {{ session('status') }}
@@ -49,28 +47,33 @@
                 <li class="alert alert-danger">{{ $error }}</li>
             @endforeach
         </ul>
-        {{-- Fin Gestion des erreurs --}}
-
-        <div class="row">
-            <div class="card">
-                <div class="card-body wizard-content">
-                    <h4 class="card-title">Selectionnez un Type d'Intervention</h4>
-                    <div class="row g-3"> <!-- Grille avec espacement -->
-                        @foreach ($domains as $item)
-                            <div class="col-md-3 col-sm-6"> <!-- Colonne adaptable -->
-                                <a class="btn btn-primary w-100 d-flex justify-content-between align-items-center" href="/dom/{{$item->id}}/domain">
-                                    {{ $item->name }}
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </a>
-                            </div>
+        <div class="card">
+            <div class="card-body wizard-content">
+                <h4 class="card-title">Selectionnez un Domaine d'Intervention</h4>
+                <h6 class="card-subtitle"></h6>
+                <div class="row g-3">
+                    @if (!empty($domain) && $domain->domaines->isNotEmpty())
+                        @foreach ($domain->domaines as $item)
+                        <div class="col-md-3 col-sm-6">
+                            <a class="btn btn-primary w-100 d-flex justify-content-between align-items-center" href="/fiche/{{ $item->id }}">
+                                {{ $item->name }}
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </a>
+                            {{-- @livewire('formulaire-intervention') --}}
+                        </div>
                         @endforeach
-                    </div>
+                    @else
+                        <p>Aucun domaine trouvé pour ce type d'intervention.</p>
+                    @endif
                 </div>
+
+                {{-- Formulaire Details --}}
+
+
             </div>
         </div>
-
         <!-- ============================================================== -->
-        <!-- End PAge Content -->
+        <!-- End Page Content -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Right sidebar -->

@@ -11,16 +11,16 @@ class Intervention extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'intervention_type_id',
+        'domaines_id',
         'factory_id',
         'time',
         'agent_id',
         'data',
     ];
 
-    public function intervention_type()
+    public function domaines()
     {
-        return $this->belongsTo(Intervention_Type::class, 'intervention_type_id');
+        return $this->belongsTo(Domaine::class, 'domaines_id');
     }
     public function agent()
     {

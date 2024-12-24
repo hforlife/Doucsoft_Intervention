@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('interventions', function (Blueprint $table) {
+        Schema::create('checklists', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
-            $table->foreignId('factory_id')->constrained('factories')->onDelete('cascade');
-            $table->dateTime('time');
-            $table->foreignId('agent_id')->constrained('agents')->onDelete('cascade');
+            $table->foreignId('intervention_id')->constrained('interventions')->onDelete('cascade');
             $table->text('data');
             $table->timestamps();
         });
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('interventions');
+        Schema::dropIfExists('checklists');
     }
 };

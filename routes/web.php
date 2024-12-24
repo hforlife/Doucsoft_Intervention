@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CheckListController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DomaineInterventionController;
 use App\Http\Controllers\Admin\FactoryController;
 use App\Http\Controllers\Admin\InterventionController;
+use App\Http\Controllers\Admin\PDFCheckController;
 use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\Admin\TypeInterventionController;
 use App\Http\Controllers\Admin\PDFController;
@@ -52,14 +54,17 @@ Route::middleware('auth:admin')->group(function () {
 
     //Intervention
     Route::get('/inter', [InterventionController::class, 'index'])->name('inter.index');
-    Route::get('/addinter', [InterventionController::class, 'create'])->name('inter.create'); // Page d'ajout d'intervention
+    Route::get('/dom/{id}/domain',[InterventionController::class, 'show'])->name('inter.show');
+    Route::get('/addinter',[InterventionController::class, 'all']);
+    Route::get('/fiche/{id}', [InterventionController::class, 'fiche'])->name('inter.fiche'); // Page d'ajout d'intervention
     Route::post('/add-inter', [InterventionController::class, 'store'])->name('inter.store'); // Méthode d'ajout d'intervention
     Route::get('/editinter/{id}', [InterventionController::class, 'edit'])->name('inter.edit');
     Route::post('/edit-inter/{id}', [InterventionController::class, 'update'])->name('inter.update');
     Route::get('/delinter/{id}', [InterventionController::class, 'destroy'])->name('inter.destroy');
 
     //Fiche d'Intervention en PDF
-    Route::get('/PDF', [PDFController::class, 'PDF']);
+    Route::get('/PDF/{intId}/{domainId}', [PDFController::class, 'PDF']);
+    Route::get('/CPDF/{intId}', [PDFCheckController::class, 'PDF']);
 
     // Type d'intervention
     Route::get('/type-int', [TypeInterventionController::class, 'index'])->name('type_int.index'); // Liste des types d'interventions
@@ -86,6 +91,16 @@ Route::middleware('auth:admin')->group(function () {
     Route::get('/editfactory/{id}', [FactoryController::class, 'edit'])->name('factory.edit');
     Route::post('/edit-factory/{id}', [FactoryController::class, 'update'])->name('factory.update');
     Route::get('/delfactory/{id}', [FactoryController::class, 'destroy'])->name('factory.destroy');
+
+    // ChekList
+    Route::get('/checklist', [ChecklistController::class, 'index'])->name('checklist.index');
+    Route::get('/addchecklist', [ChecklistController::class, 'create'])->name('check.create');
+    Route::post('/add-checklist', [ChecklistController::class, 'store'])->name('check.store');
+    Route::get('/editchecklist/{id}', [ChecklistController::class, 'edit'])->name('check.edit');
+    Route::post('/edit-checklist/{id}', [ChecklistController::class, 'update'])->name('check.update');
+    Route::get('/delcheklist/{id}', [ChecklistController::class, 'destroy'])->name('check.destroy');
+
+
 
     // Profil
     Route::get('/profil', [ProfilController::class, 'index'])->name('profile.index'); // Page de Profil

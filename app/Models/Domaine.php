@@ -18,4 +18,8 @@ class Domaine extends Model
     {
         return $this->belongsTo(Intervention_Type::class, 'intervention_type_id');
     }
+    public function interventions()
+    {
+        return $this->hasMany(Intervention::class, 'intervention_id');
+    }
 }

@@ -3,23 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Checklist;
 use App\Models\Intervention;
-use App\Models\Domaine;
+use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
-class PDFController extends Controller
+class PDFCheckController extends Controller
 {
-    public function PDF($intId, $domainId)
+    //
+    public function PDF($intId)
     {
-        $info = Intervention::find($intId);
-        $dom = Domaine::find($domainId);
+        $info = Checklist::find($intId);
 
         // Décoder les données JSON
         $type = json_decode($info->data, true);
-        $domaine = $info->domaines->name;
-        $typeName = $dom->intervention_type->name ?? 'N/A';
+        $domaine = $info->intervention->name;
 
-        $sentence = "FICHE D'INFORMATION - " . $typeName;
+        $sentence = "CHECKLIST D'INTERVENTION";
 
         $pdf = new CustomPDF(); // Utilisation de la classe étendue
         $pdf->AliasNbPages();
@@ -45,40 +45,17 @@ class PDFController extends Controller
         $pdf->SetTextColor(0, 0, 0);
 
         // En-tête du tableau
-        $pdf->Cell(40, 10, utf8_decode('N°'), 1, 0, 'C');
-        $pdf->Cell(40, 10, 'Services', 1, 0, 'C');
-        $pdf->Cell(40, 10, 'Risque', 1, 0, 'C');
-        $pdf->Cell(40, 10, 'Observation', 1, 0, 'C');
-        $pdf->Cell(20, 10, 'Check', 1, 0, 'C');
+        $pdf->Cell(60, 10, utf8_decode('N°'), 1, 0, 'C');
+        $pdf->Cell(60, 10, 'Contenu', 1, 0, 'C');
+        $pdf->Cell(60, 10, 'Check', 1, 0, 'C');
         $pdf->Ln();
 
         // Lignes du tableau
         $pdf->SetFont('Arial', '', 12);
         $i = 1; // Compteur de ligne
         foreach ($data as $row) {
-            $pdf->Cell(40, 10, utf8_decode($i), 1, 0, 'C');
-            $pdf->Cell(40, 10, utf8_decode($row['service'] ?? 'N/A'), 1, 0, 'C'); // Services
-
-            $risqueText = 'N/A';
-            if (isset($row['risque'])) {
-                switch ($row['risque']) {
-                    case 1:
-                        $risqueText = 'Bas';
-                        break;
-                    case 2:
-                        $risqueText = 'Moyen';
-                        break;
-
-                    case 3:
-                        $risqueText = 'Elévé';
-                        break;
-
-                    default:$risqueText = 'Inconnu';
-                }
-
-            }
-            $pdf->Cell(40, 10, utf8_decode($risqueText), 1, 0, 'C'); // Risque
-            $pdf->Cell(40, 10, utf8_decode($row['observation'] ?? 'N/A'), 1, 0, 'C'); // Observation
+            $pdf->Cell(60, 10, utf8_decode($i), 1, 0, 'C');
+            $pdf->Cell(60, 10, utf8_decode($row['content'] ?? 'N/A'), 1, 0, 'C'); // Content
             $checkText = 'N/A';
             if (isset($row['validCheck'])) {
                     if($row['validCheck'] == 'on'){
@@ -87,7 +64,7 @@ class PDFController extends Controller
                         $checkText = 'X';
                     }
                 }
-                $pdf->Cell(20, 10, utf8_decode($checkText), 1, 0, 'C');
+                $pdf->Cell(60, 10, utf8_decode($checkText), 1, 0, 'C');
                 // $pdf->Cell(20, 10, utf8_decode($row['validCheck'] ?? 'N/A'), 1, 0, 'C'); // Check
                 $pdf->Ln();
                 $i++; // Incrémenter le numéro de ligne

@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Intervention_Type extends Model
+class Checklist extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
-        'description'
+        'intervention_id',
+        'data'
     ];
-    public function domaines()
-    {
-        return $this->hasMany(Domaine::class, 'intervention__type_id');
+
+    public function intervention(){
+        return $this->belongsTo(Intervention::class, 'intervention_id');
     }
 }

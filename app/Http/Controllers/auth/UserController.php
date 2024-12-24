@@ -14,9 +14,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $admin = Admin::all();
-        $sup = Superviseur::all();
-        $agent = Agent::all();
+        $admin = Admin::paginate(5);
+        $sup = Superviseur::paginate(5);
+        $agent = Agent::paginate(5);
         return view('Admin.user', compact('admin', 'sup', 'agent'));
     }
 

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->foreignId('domaine_id')->constrained('domaines')->onDelete('cascade');
             $table->timestamps();
         });
     }

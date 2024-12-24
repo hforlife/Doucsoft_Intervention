@@ -47,14 +47,14 @@ class FactoryController extends Controller
 
         $entrys = new Factory();
         $entrys->name = $request->name;
-        $entrys->forme = $request->forme;
+        $entrys->status = $request->status;
         $entrys->description = $request->description;
         $entrys->address = $request->address;
         $entrys->n°tel = $request->n°tel;
         $entrys->n°responsable = $request->n°responsable;
         $entrys->save();
 
-        return redirect()->route('factory.index')->with('success', 'Ajout effectué avec succèss.');
+        return redirect()->route('factory.index')->with('status', 'Ajout effectué avec succèss.');
     }
 
     /**
@@ -93,14 +93,14 @@ class FactoryController extends Controller
 
         $entrys = Factory::findOrFail($id);
         $entrys->name = $request->name;
-        $entrys->forme = $request->forme;
+        $entrys->status = $request->status;
         $entrys->description = $request->description;
         $entrys->address = $request->address;
         $entrys->n°tel = $request->n°tel;
         $entrys->n°responsable = $request->n°responsable;
         $entrys->update();
 
-        return redirect()->route('factory.index')->with('success', 'Modification effectué avec succèss.');
+        return redirect()->route('factory.index')->with('status', 'Modification effectué avec succèss.');
     }
 
     /**
@@ -112,6 +112,6 @@ class FactoryController extends Controller
         $entrys = Factory::findOrFail($id);
         $entrys->delete();
 
-        return redirect()->route('factory.index')->with('success', 'Suppression effectué avec succès.');
+        return redirect()->route('factory.index')->with('status', 'Suppression effectué avec succès.');
     }
 }

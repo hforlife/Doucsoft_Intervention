@@ -9,13 +9,13 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-                <h4 class="page-title">Entreprises</h4>
+                <h4 class="page-title">CheckList</h4>
                 <div class="ms-auto text-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Entreprises
+                                CheckList
                             </li>
                         </ol>
                     </nav>
@@ -58,7 +58,7 @@
                 <!-- ============================================================== -->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title mb-0">Listes Entreprises</h5>
+                        <h5 class="card-title mb-0">Historique CheckList</h5>
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -66,54 +66,45 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Nom</th>
-                                    <th scope="col">Forme Juridique</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Adresse</th>
-                                    <th scope="col">N°Tel</th>
-                                    <th scope="col">N°Responsable</th>
+                                    <th scope="col">Intervention</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             @php
                                 $ide = 1;
                             @endphp
-
-                            @foreach ($entrys as $entry)
-                                <tbody class="customtable">
-                                    <tr>
-                                        <td>{{ $ide }}</td>
-                                        <td>{{ $entry->name }}</td>
-                                        <td>{{ $entry->status }}</td>
-                                        <td>{{ $entry->description }}</td>
-                                        <td>{{ $entry->address }}</td>
-                                        <td>{{ $entry->n°tel }}</td>
-                                        <td>{{ $entry->n°responsable }}</td>
-                                        <td>
-                                            <a href="{{ url('/editfactory/' . $entry->id) }}" type="button"
-                                                class="btn btn-primary">
-                                                <i class="mdi mdi-pencil"></i>
-                                            </a>
-                                            <a href="{{ url('/delfactory/' . $entry->id) }}" type="button"
-                                                class="btn btn-danger">
-                                                <i class="mdi mdi-delete"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                @php
-                                    $ide++;
-                                @endphp
+                            @foreach ($collection as $item)
+                            <tbody class="customtable">
+                                <tr>
+                                    <td>{{ $ide }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->intervention->name }}</td>
+                                    <td>
+                                        <a href="{{ url('/CPDF/' . $item->id) }}"
+                                            type="button" class="btn btn-warning">
+                                            <i class="mdi mdi-file-document"></i>
+                                        </a>
+                                        <a href="{{ url('/delcheklist/' . $item->id) }}"
+                                            type="button" class="btn btn-danger">
+                                            <i class="mdi mdi-delete"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                               </tbody>
+                               @php
+                                   $ide++;
+                               @endphp
                             @endforeach
+
                         </table>
                     </div>
                 </div>
-                {{ $entrys->links() }}
-                <a class="btn btn-primary" href="/addfactory">Ajouter Entreprise</a>
+
+                <a class="btn btn-primary" href="{{ route('check.create') }}">Ajouter une Checklist</a>
 
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- Fin Tableau -->
         <!-- ============================================================== -->
-
-        @include('admin.include.footer')
+@include('admin.include.footer')

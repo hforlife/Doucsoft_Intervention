@@ -77,7 +77,7 @@ class SupController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'address' => 'required',
+            'address' => 'requiredstring',
             'number' => 'required|min:8',
             'password' => 'nullable|string|min:8|confirmed', // Le champ password peut être nul
         ]);
